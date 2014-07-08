@@ -3,7 +3,7 @@ class Task < ActiveRecord::Base
   validates :body, presence: true
 
   def new_task(task)
-    current_user.new
+    current_user.task << task
   end
 
   def complete_task(task)

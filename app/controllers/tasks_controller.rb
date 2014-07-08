@@ -6,13 +6,15 @@ class TasksController < ApplicationController
   end
 
   def create
+
     @task = current_user.tasks.new(task_params)
-    @tasks = current_user.tasks
-    if @task.save
-      redirect_to :tasks
-    else
-      render :index
-    end
+    @tasks = current_user.tasks.not_completed.
+      order("created_at DESC")
+
+      if @task.save
+        # render partial: "tasks/task", task: @task
+        render @tasks
+      end
   end
 
   def update
