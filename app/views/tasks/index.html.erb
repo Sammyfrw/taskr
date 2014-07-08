@@ -1,7 +1,24 @@
 <h1> Taskbar </h1>
 
+<%= form_for @task do |form|%>
+<div>
+  <%= form.label :title%>
+  <%= form.text_field :title%>
+</div>
+<div>
+  <%= form.label :body%>
+  <%= form.text_field :body%>
+</div>
+
+  <%= form.submit  "Create task" %>
+<%end%> 
+
 <ul>
 <% @tasks.each do |task| %>
-  <li> <%= task.title %></li>
+  <li> 
+    <p> <%= task.title %> </p>
+    <p> &mdash; <%= task.body %> </p>
+
+    </li>
   <% end %>
 </ul>
