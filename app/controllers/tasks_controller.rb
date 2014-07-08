@@ -1,16 +1,31 @@
 class TasksController < ApplicationController
   before_action :require_login 
   def index
-    @tasks = current_user.tasks
-    @task = Task.new
+    @tasks = current_user.tasks.where(completed: false)
+    @task = Task.new  
   end
 
   def create
-    @task = current_user.tasks.create(task_params)
+    @task = current_user.tasks.new(task_params)
+    @tasks = current_user.tasks
+    if @task.save
+      redirect_to :tasks
+    else
+      render :index
+    end
+  end
+
+  def update
+    @task = current_user.tasks.find(params[:id])
+    @task.complete_task(@task)
     redirect_to :tasks
   end
 
-
+  def destroy
+    @task = current_user.tasks.find(params[:id])
+    @task.delete_task(@task)
+    redirect_to :tasks
+  end
 
   private
 

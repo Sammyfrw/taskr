@@ -7,7 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<h1> <%= link_to "Taskr!", root_path%></h1>
+<h2> <%= link_to "My dashboard", root_path%></h2>
+<% if signed_in? %>
+  <%= link_to "Sign Out", sign_out_path%>
+<%end%>
 <%= yield %>
 
 </body>

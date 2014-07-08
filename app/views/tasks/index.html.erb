@@ -1,24 +1,9 @@
 <h1> Taskbar </h1>
+<%= link_to "Completed Tasks", [:completed_tasks]%>
 
-<%= form_for @task do |form|%>
-<div>
-  <%= form.label :title%>
-  <%= form.text_field :title%>
-</div>
-<div>
-  <%= form.label :body%>
-  <%= form.text_field :body%>
-</div>
-
-  <%= form.submit  "Create task" %>
-<%end%> 
+<%=render "form" %>
 
 <ul>
-<% @tasks.each do |task| %>
-  <li> 
-    <p> <%= task.title %> </p>
-    <p> &mdash; <%= task.body %> </p>
+  <%=render @tasks%>
 
-    </li>
-  <% end %>
 </ul>
