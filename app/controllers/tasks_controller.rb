@@ -8,13 +8,15 @@ class TasksController < ApplicationController
   def create
 
     @task = current_user.tasks.new(task_params)
-    @tasks = current_user.tasks.not_completed.
-      order("created_at DESC")
-
-      if @task.save
-        # render partial: "tasks/task", task: @task
-        render @tasks
-      end
+    @tasks = current_user.tasks.where(completed:false).order("created_at DESC")
+    if @task.save
+      # render partial: "tasks/task", task: @task
+      render @task
+    else
+      render partial: "errors", 
+      locals: {target: @task}, 
+      status: 422
+    end
   end
 
   def update
